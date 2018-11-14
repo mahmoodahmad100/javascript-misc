@@ -1,1 +1,1 @@
-# javascript-misc
+# javascript misc

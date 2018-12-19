@@ -35,7 +35,7 @@ database.ref('chat/' + chat_id).on('child_added', function(data) {
 });
 
 // save the message when hitting "enter" or clicking on "send" button. example: save_message(message_data, next_key);
-save_message(data, key)
+function save_message(data, key)
 {
 	database.ref('chat/' + chat_id + '/' + key).set({
 		sender_id: data.sender_id,

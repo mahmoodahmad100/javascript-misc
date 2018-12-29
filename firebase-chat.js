@@ -18,7 +18,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // show the messages in the page
-var messages_ref = database.ref('chat/' + chat_id);
+var messages_ref = database.ref('chat/' + chat_id + '/data');
 messages_ref.once('value', function(snapshot) {
 	if(snapshot.numChildren() == 0)
 		next_key = 1;
@@ -29,7 +29,7 @@ messages_ref.once('value', function(snapshot) {
 });
 
 // set the key for the next message when a new message sent
-database.ref('chat/' + chat_id).on('child_added', function(data) {
+database.ref('chat/' + chat_id + '/data').on('child_added', function(data) {
 	var last_key = data.key;
 	next_key = parseInt(last_key) + 1;
 });
@@ -37,7 +37,7 @@ database.ref('chat/' + chat_id).on('child_added', function(data) {
 // save the message when hitting "enter" or clicking on "send" button. example: save_message(message_data, next_key);
 function save_message(data, key)
 {
-	database.ref('chat/' + chat_id + '/' + key).set({
+	database.ref('chat/' + chat_id + '/data/' + key).set({
 		sender_id: data.sender_id,
 		receiver_id: data.receiver_id,
 		message: data.message,
